@@ -10,8 +10,7 @@
     "deploy": "gh-pages -d build"
   },
   "repository": {
-    "type": "git",
-    "url": "git+https://github.com/luxplanjay/webpack-starter-kit.git"
+    "type": "git"
   },
   "keywords": [],
   "author": "Dmytro Vitenko",
