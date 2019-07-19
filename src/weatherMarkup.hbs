@@ -1,8 +1,8 @@
 <h2>Current weather</h2>
-<img class="icon" src="https://cdn.apixu.com/weather/64x64/day/113.png" alt="Sunny" />
+<img class="icon" src="https://{{current.condition.icon}}" alt="{{current.condition.text}}" />
 
-<p>Location: <span>{{temp_c}}</span></p>
-<p>Temperature: <span>20&#8451;</span></p>
-<p>Humidity: <span>65%</span></p>
-<p>Wind: <span>3kph</span></p>
-<p>Conditions: <span>Sunny</span></p>
+<p>Location: <span>{{location.name}}</span></p>
+<p>Temperature: <span>{{current.temp_c}}&#8451;</span></p>
+<p>Humidity: <span>{{current.humidity}}%</span></p>
+<p>Wind: <span>{{current.wind_kph}}kph</span></p>
+<p>Conditions: <span>{{current.condition.text}}</span></p>

@@ -8,6 +8,14 @@ html {
   box-sizing: inherit;
 }
 
-.weather.is-hidden {
+/* .weather.is-hidden {
   display: none;
+} */
+
+body {
+  background-color: #d4ecc0;
+}
+
+.weather-app {
+  text-align: center;
 }

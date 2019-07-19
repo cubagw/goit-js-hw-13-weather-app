@@ -1,9 +1,33 @@
+import './styles.css';
+import 'pnotify/dist/PNotifyBrightTheme.css';
+
+import getGeoPosition from './getGeoPosition.js';
 import fetchWeather from './fetchWeather.js';
 import weatherMarkup from './weatherMarkup.hbs';
 
+import PNotify from 'pnotify/dist/es/PNotify.js';
+
 const refs = {
   searchForm: document.querySelector('#search-form'),
+  weather: document.querySelector('#weather'),
 };
+
+getGeoPosition()
+  .then(location => {
+    fetchWeather
+      .fetchOfWeather(
+        `${location.coords.latitude}, ${location.coords.longitude}`,
+      )
+      .then(data => {
+        const weatherContent = weatherMarkup(data);
+        refs.weather.innerHTML = weatherContent;
+      });
+  })
+  .catch(err => {
+    PNotify.alert(
+      'Нет прав доступа к геопозиции, используйте поиск по имени города.',
+    );
+  });
 
 refs.searchForm.addEventListener('submit', searchFormSubmitHandler);
 
@@ -12,16 +36,13 @@ function searchFormSubmitHandler(e) {
 
   const input = e.currentTarget.elements.city.value;
 
-  fetchWeather.fetchOfWeather(input).then(data => {
-    console.log(data);
-  });
+  fetchWeather
+    .fetchOfWeather(input)
+    .then(data => {
+      const weatherContent = weatherMarkup(data);
+      refs.weather.innerHTML = weatherContent;
+    })
+    .catch(() => {
+      PNotify.alert('Город не найден.');
+    });
 }
-
-//api.apixu.com/v1/current.json?key=3106a8f4d1914e2f921142834191507&q=Paris
-
-// const baseUrl = 'http://api.apixu.com/v1/current.json';
-// const myKey = '?key=3106a8f4d1914e2f921142834191507';
-// const targetCity = `&q=${input}`;
-
-// fetch(baseUrl + myKey + targetCity).then(response => response.json());
-//   .then(wether => console.log(wether));
